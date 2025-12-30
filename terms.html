@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | 256 Travels & Tour</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- Shared Brand Palette --- */
+            --bg-deep: #020617;       
+            --bg-surface: #0f172a;    
+            --accent-brand: #ff6600;  
+            --accent-gradient: linear-gradient(135deg, #ff6600 0%, #ff9e22 100%);
+            --accent-glow: rgba(255, 102, 0, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --container-width: 1000px; /* Slightly narrower for reading */
+            --radius-lg: 16px;
+            --radius-md: 8px;
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        /* --- Base Reset --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; color: white; }
+        a { text-decoration: none; transition: all 0.3s ease; }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-brand); }
+
+        /* --- Navigation --- */
+        .navbar {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(2, 6, 23, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;
+            color: white; display: flex; align-items: center; gap: 10px;
+        }
+        .logo i { color: var(--accent-brand); font-size: 1.8rem; }
+        
+        .back-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .back-link:hover { color: var(--accent-brand); }
+
+        /* --- Header --- */
+        .page-header {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: radial-gradient(circle at top, rgba(255,102,0,0.1) 0%, transparent 70%);
+        }
+        .page-title { font-size: 3.5rem; margin-bottom: 10px; }
+        .last-updated { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Content Container --- */
+        .content-container {
+            max-width: var(--container-width);
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+
+        .terms-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- Typography Styling --- */
+        .terms-section { margin-bottom: 40px; }
+        .terms-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-brand);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .terms-section p, .terms-section li {
+            color: #cbd5e1;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        .terms-section ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        .terms-section li {
+            position: relative;
+            padding-left: 20px;
+        }
+        .terms-section li::before {
+            content: "•";
+            color: var(--accent-brand);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- Footer (Simplified) --- */
+        footer {
+            background-color: black;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.5rem; }
+            .terms-card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-plane-departure"></i> 256 TRAVELS
+            </a>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">Terms & Conditions</h1>
+        <p class="last-updated">Last Updated: January 2025</p>
+    </header>
+
+    <div class="content-container">
+        <div class="terms-card">
+            
+            <div class="terms-section">
+                <p>Welcome to <strong>256 Travels & Tour</strong> (“256 Travels”, “we”, “our”, “us”). By using our services, making a booking, or submitting an enquiry through our website or other channels, you (“you”, “guest”, “client”, “traveller”) agree to be bound by the following Terms & Conditions. If you disagree with any part, please do not proceed with booking or payment.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>1. Scope and Acceptance</h2>
+                <p>Our Terms & Conditions apply to all services offered by 256 Travels — including air-ticketing, visa assistance, hotel bookings, tours, car rentals, airport transfers, medical tourism facilitation, and any other travel-related services (“Services”).</p>
+                <ul>
+                    <li>Once you submit an enquiry or booking request and make any payment (deposit or full), a binding contract is formed between you and 256 Travels.</li>
+                    <li>These terms — along with any booking confirmation, itinerary, invoice, or communication from us — form the entire agreement.</li>
+                    <li>We reserve the right to amend these Terms & Conditions at any time; updates will be published on our website and apply to future bookings.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>2. Booking, Payment & Price Policy</h2>
+                <ul>
+                    <li>To confirm a booking, you must provide accurate and complete personal and contact information. Any incorrect information may lead to cancellation, and 256 Travels will not be liable for losses incurred.</li>
+                    <li><strong>Payment Methods:</strong> We accept Bank Transfers, Mobile Money, and major Credit/Debit Cards. Depending on the service type, a deposit or full payment may be required upfront.</li>
+                    <li>Prices quoted are indicative and subject to change until payment is received in full. Fluctuations may occur due to Supplier tariffs, taxes, fuel surcharges, exchange rates, or other external factors.</li>
+                    <li>Additional taxes, fees, or mandatory charges (e.g., government taxes, visa fees, airport taxes) are payable by the guest unless otherwise stated.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>3. Cancellations, Modifications & Refunds</h2>
+                <p>Cancellation and refund policies depend on the specific service and the relevant Supplier’s terms. As we act as an intermediary, third-party supplier policies govern refunds.</p>
+                <ul>
+                    <li>Service fees or booking charges paid to 256 Travels are non-refundable unless explicitly stated otherwise.</li>
+                    <li>Requests for changes (date change, name correction, itinerary modification) will be attempted but cannot be guaranteed. Additional charges may apply.</li>
+                    <li>In cases of <strong>Force Majeure</strong> (natural disasters, political unrest, pandemics, etc.), services may be modified or cancelled. Refunds or credits will be subject to supplier terms.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>4. Travel Documents, Health & Compliance</h2>
+                <p>It is your responsibility to ensure that all necessary travel documents (passport, visa, permits, health certificates, vaccination records) are valid. 256 Travels facilitates the process but has no control over authority decisions.</p>
+                <ul>
+                    <li>Any costs or delays due to invalid documentation are solely your responsibility.</li>
+                    <li>If travel involves health considerations (e.g., medical tourism, pregnancy), you must assess your suitability to travel. 256 Travels is not liable for health complications during travel.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>5. Third-Party Suppliers & Liability</h2>
+                <p>256 Travels acts as an agent for third-party suppliers (airlines, hotels, transport operators, hospitals). The actual services are provided by these suppliers under their own terms.</p>
+                <ul>
+                    <li>We are not liable for delays, cancellations, loss, damage, or injury caused by suppliers or circumstances beyond our control.</li>
+                    <li>Our total liability for any claim is limited strictly to the amount paid by you for the Services. We are not responsible for indirect or consequential damages.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>6. Travel Insurance</h2>
+                <p>We strongly recommend you obtain comprehensive travel insurance covering trip cancellation, medical emergencies, theft, and other risks. 256 Travels does not provide insurance unless explicitly stated as part of a package.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>7. Changes by 256 Travels</h2>
+                <p>We reserve the right to alter or cancel bookings if suppliers change rates or if unforeseen external factors arise. We will notify you immediately and attempt to offer suitable alternatives.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>8. Customer Responsibilities</h2>
+                <ul>
+                    <li>Provide accurate information (names per passport, contact info).</li>
+                    <li>Review all tickets and vouchers immediately upon receipt.</li>
+                    <li>Abide by local laws, customs, and supplier rules at the destination.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>9. Complaints & Dispute Resolution</h2>
+                <ul>
+                    <li>Complaints must be submitted in writing within <strong>14 days</strong> of the end of the travel or incident.</li>
+                    <li>In case of unresolved disputes, you and 256 Travels agree to resolve the matter through the courts in <strong>Accra, Ghana</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>10. Force Majeure</h2>
+                <p>Neither 256 Travels nor its suppliers are liable for failures caused by events beyond control (natural disasters, pandemics, strikes, government actions). Refunds or rescheduling will be based on supplier availability.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>11. Privacy & Data Protection</h2>
+                <p>We are committed to protecting your privacy. Personal information collected during booking is used solely for providing our services and will not be shared with third parties without consent, except where necessary for booking fulfillment (e.g., sharing name/passport with airlines).</p>
+            </div>
+
+            <div class="terms-section" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; margin-top: 40px;">
+                <p><strong>Acceptance:</strong> By making a booking or payment with 256 Travels, you confirm that you have read, understood, and accepted all terms herein.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 256 Travels & Tour. All Rights Reserved. | <a href="index.html" style="color:var(--accent-brand);">Return Home</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

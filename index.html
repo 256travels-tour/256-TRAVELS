@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="256 Travels - Global Mobility, Perfected. Corporate travel, visa assistance, and luxury holidays.">
+    <title>256 Travels | Global Mobility, Perfected</title>
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- Brand Palette --- */
+            --bg-deep: #020617;       /* Midnight Navy */
+            --bg-surface: #0f172a;    /* Slate Navy */
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            
+            /* Accents */
+            --accent-brand: #ff6600;  
+            --accent-gradient: linear-gradient(135deg, #ff6600 0%, #ff9e22 100%);
+            --accent-hover: #e65c00;
+            --whatsapp-green: #25d366;
+            
+            /* Text */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            /* Measurements */
+            --container-width: 1280px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 20px rgba(255, 102, 0, 0.3);
+        }
+
+        /* --- Global Reset --- */
+        html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; color: white; }
+        a { text-decoration: none; transition: 0.3s ease; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-brand); }
+
+        /* --- Layout Utilities --- */
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+        .section-padding { padding: 100px 0; }
+        
+        /* Animation Classes */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: opacity, transform; }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Top Bar --- */
+        .top-bar {
+            background-color: #000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.85rem;
+            position: relative;
+            z-index: 1002;
+        }
+        .top-bar .container { display: flex; justify-content: flex-end; align-items: center; height: 40px; gap: 25px; }
+        
+        /* Global Dropdown */
+        .global-dropdown { position: relative; cursor: pointer; height: 100%; display: flex; align-items: center; color: var(--text-muted); }
+        .global-dropdown:hover { color: var(--accent-brand); }
+        .global-list {
+            position: absolute; top: 100%; right: 0; width: 240px;
+            background: var(--bg-glass); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1); border-top: 2px solid var(--accent-brand);
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s ease; z-index: 1003;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+        }
+        .global-dropdown:hover .global-list { opacity: 1; visibility: visible; transform: translateY(0); }
+        .global-list a { display: block; padding: 12px 20px; color: var(--text-main); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .global-list a:hover { background: rgba(255,255,255,0.05); color: var(--accent-brand); padding-left: 25px; }
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed; top: 40px; width: 100%; z-index: 1000;
+            padding: 20px 0; transition: all 0.4s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(12px);
+            padding: 15px 0; top: 0; box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: white; display: flex; align-items: center; gap: 12px; }
+        .logo i { color: var(--accent-brand); font-size: 1.8rem; }
+
+        /* Desktop Nav */
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.95rem; position: relative; padding: 5px 0; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background: var(--accent-gradient); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: white; }
+
+        /* Mobile Toggle */
+        .menu-toggle { display: none; color: white; font-size: 1.6rem; cursor: pointer; padding: 5px; }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh; min-height: 750px; position: relative;
+            background: linear-gradient(to bottom, rgba(2,6,23,0.3), rgba(2,6,23,0.8)), 
+                        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 0 20px; margin-top: 40px; }
+        
+        .hero-subtitle {
+            display: inline-block; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px;
+            color: var(--accent-brand); margin-bottom: 20px; font-weight: 600;
+            background: rgba(0,0,0,0.3); padding: 8px 16px; border-radius: 50px; backdrop-filter: blur(5px);
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.1; margin-bottom: 25px;
+            background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .hero p { font-size: clamp(1.1rem, 4vw, 1.4rem); color: rgba(255,255,255,0.9); font-weight: 300; max-width: 700px; margin: 0 auto 40px; }
+
+        /* --- NEW ENQUIRY FORM STYLES --- */
+        .enquiry-section { margin-top: -120px; position: relative; z-index: 10; padding-bottom: 40px; }
+        .enquiry-card {
+            background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1); border-top: 4px solid var(--accent-brand);
+            border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-soft);
+        }
+
+        /* 1. Trip Options Row */
+        .trip-options { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .radio-group { display: flex; gap: 15px; }
+        .radio-label { color: var(--text-main); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .radio-label input { accent-color: var(--accent-brand); }
+        .class-select {
+            background: transparent; color: var(--accent-brand); border: none; font-weight: 700; cursor: pointer; outline: none; margin-left: auto;
+        }
+        .class-select option { background: var(--bg-deep); color: white; }
+
+        /* 2. Main Booking Grid */
+        .booking-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;
+        }
+        
+        /* Unified Input Box Style for Grid */
+        .input-box {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-md); padding: 8px 12px; position: relative;
+            transition: 0.3s;
+        }
+        .input-box:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+        .input-box label { display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px; font-weight: 600; }
+        .input-box input {
+            width: 100%; background: transparent; border: none; color: white; font-size: 1rem; font-weight: 500; outline: none;
+        }
+        /* Date Input Fix */
+        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+
+        /* Passenger Dropdown */
+        .passenger-trigger { cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: white; font-weight: 500; height: 24px;}
+        .passenger-dropdown {
+            position: absolute; top: 110%; left: 0; width: 250px;
+            background: var(--bg-surface); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-md); padding: 15px; z-index: 50;
+            display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .passenger-dropdown.show { display: block; }
+        
+        .pax-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .pax-label span { display: block; font-size: 0.8rem; color: var(--text-muted); }
+        .pax-controls { display: flex; align-items: center; gap: 10px; }
+        .pax-btn {
+            width: 25px; height: 25px; background: rgba(255,255,255,0.1); border: none; color: white;
+            border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+        .pax-btn:hover { background: var(--accent-brand); }
+        .pax-apply { width: 100%; padding: 8px; background: var(--accent-brand); border: none; color: white; border-radius: 4px; cursor: pointer; margin-top: 5px; font-weight: 600; }
+
+        /* 3. Contact Grid */
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .contact-input {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: white; padding: 12px 16px; border-radius: var(--radius-md); font-size: 0.95rem; outline: none;
+        }
+        .contact-input:focus { border-color: var(--accent-brand); }
+
+        .btn-premium {
+            background: var(--accent-gradient); color: white; border: none; padding: 0 30px;
+            font-size: 1rem; font-weight: 700; border-radius: var(--radius-md); cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.3); height: 48px; width: 100%;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 102, 0, 0.5); }
+
+        /* --- Philosophy & Features --- */
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 15px; }
+        .section-header .separator { width: 60px; height: 4px; background: var(--accent-gradient); margin: 0 auto 20px; border-radius: 2px; }
+        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: var(--bg-surface); padding: 40px; border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.03); text-align: center; transition: all 0.4s ease;
+        }
+        .feature-card:hover { transform: translateY(-10px); border-color: rgba(255,102,0,0.3); }
+        .feature-icon { font-size: 2.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .feature-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
+
+        /* --- Leadership --- */
+        .leadership-section { margin-top: 80px; padding-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .leadership-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,102,0,0.1); border-left: 4px solid var(--accent-brand);
+            padding: 40px; border-radius: var(--radius-lg); max-width: 900px; margin: 0 auto;
+            display: flex; align-items: center; gap: 40px;
+        }
+        .leader-info h3 { font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 10px; }
+        .leader-role { color: var(--accent-brand); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; font-weight: 700; margin-bottom: 15px; display: block; }
+        .leader-quote { font-style: italic; color: var(--text-muted); font-size: 1.1rem; font-family: 'Playfair Display', serif; }
+
+        /* --- Services --- */
+        .services-section { background-color: #050b1d; position: relative; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .service-card {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg); overflow: hidden; transition: all 0.4s ease;
+            display: flex; flex-direction: column;
+        }
+        .service-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.04); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3); }
+        
+        .service-header { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 20px; }
+        .service-icon-box {
+            width: 50px; height: 50px; background: rgba(255,102,0,0.1); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; color: var(--accent-brand); font-size: 1.4rem; flex-shrink: 0;
+        }
+        .service-header h3 { font-size: 1.3rem; margin: 0; }
+        
+        .service-body { padding: 30px; flex-grow: 1; }
+        .service-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0; line-height: 1.6; }
+
+        /* --- Mission --- */
+        .mission-section {
+            padding: 160px 0; text-align: center;
+            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.7)), 
+                        url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+        }
+        .mission-content {
+            max-width: 800px; margin: 0 auto; padding: 60px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(10px); border-radius: var(--radius-lg);
+        }
+        .mission-content p { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 4vw, 2rem); font-style: italic; color: white; line-height: 1.4; }
+
+        /* --- Footer --- */
+        footer { background-color: #000; padding: 80px 0 30px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 60px; }
+        .footer-brand p { font-size: 0.9rem; color: #64748b; margin-top: 20px; line-height: 1.8; }
+        .footer-heading { color: white; font-size: 1rem; font-weight: 600; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent-brand); padding-left: 5px; }
+        .contact-list li { display: flex; gap: 15px; color: var(--text-muted); margin-bottom: 15px; font-size: 0.9rem; }
+        .contact-list i { color: var(--accent-brand); margin-top: 4px; }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: #475569; font-size: 0.85rem; }
+
+        /* --- WhatsApp --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background-color: var(--whatsapp-green); color: #FFF; border-radius: 50%;
+            text-align: center; font-size: 30px; box-shadow: 0px 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
+        
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hero { background-attachment: scroll; }
+            .booking-grid { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+            .contact-grid button { grid-column: span 2; }
+        }
+
+        @media (max-width: 768px) {
+            .fade-up { opacity: 1 !important; transform: none !important; }
+            
+            .top-bar-container { justify-content: space-between; font-size: 0.75rem; }
+            .top-bar span:last-child { display: none; }
+            
+            .navbar { top: 40px; padding: 15px 0; background: rgba(2,6,23,0.95); }
+            .navbar.scrolled { top: 0; }
+            
+            .nav-links {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background: rgba(2, 6, 23, 0.98); flex-direction: column;
+                justify-content: center; align-items: center; gap: 30px;
+                transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: 0; z-index: 998;
+            }
+            .nav-links.active { transform: translateX(0); }
+            .nav-links a { font-size: 1.5rem; color: white; }
+            .menu-toggle { display: block; z-index: 999; position: relative; }
+            
+            .hero-content { margin-top: 60px; }
+            
+            /* Enquiry Form Mobile */
+            .enquiry-section { margin-top: 0; padding-top: 0; background: var(--bg-deep); }
+            .enquiry-card { border-radius: 0; border: none; background: transparent; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .booking-grid, .contact-grid { grid-template-columns: 1fr; }
+            .contact-grid button { grid-column: span 1; }
+            .trip-options { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .class-select { margin-left: 0; }
+            
+            .leadership-card { flex-direction: column; text-align: center; padding: 30px 20px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 20px; right: 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            .top-bar-container { justify-content: center; }
+            .global-dropdown { font-size: 0.75rem; }
+            .global-list { width: 220px; right: -20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="global-dropdown">
+                <div class="global-trigger">
+                    <i class="fas fa-globe-americas" style="margin-right:8px"></i> Global Offices <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left:5px"></i>
+                </div>
+                <ul class="global-list">
+                    <li><a href="tel:+233554637256"><i class="fas fa-map-marker-alt" style="color:var(--accent-brand); width:20px;"></i> Ghana: +233 55 463 7256</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt" style="color:#aaa; width:20px;"></i> USA: +1 800 123 4567</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt" style="color:#aaa; width:20px;"></i> UK: +44 20 7946 0123</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt" style="color:#aaa; width:20px;"></i> UAE: +971 4 123 4567</a></li>
+                </ul>
+            </div>
+            <span><i class="fas fa-envelope" style="color:var(--accent-brand); margin-right:5px;"></i> 256travels.tour@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-plane-departure"></i> 256 TRAVELS
+            </a>
+            <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="nav-links">
+                <a href="#">Home</a>
+                <a href="#about">Philosophy</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content fade-up">
+            <span class="hero-subtitle">Global Mobility, Perfected</span>
+            <h1 class="hero-title">Your Journey.<br>Our Expertise.</h1>
+            <p>From complex corporate logistics to life-changing leisure, we don’t just book travel—we orchestrate seamless journeys for the discerning traveler.</p>
+            <a href="#enquiry" class="btn-premium" style="width: auto; display: inline-flex; background: transparent; border: 1px solid var(--accent-brand); margin-top: 20px;">Request Priority Consultation</a>
+        </div>
+    </header>
+
+    <!-- NEW ENQUIRY FORM SECTION -->
+    <section class="enquiry-section fade-up" id="enquiry">
+        <div class="container">
+            <div class="enquiry-card">
+                <form class="enquiry-form" id="enquiryForm">
+                    
+                    <!-- 1. Options Row (Trip Type & Class) -->
+                    <div class="trip-options">
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="tripType" value="One Way"> One Way</label>
+                            <label class="radio-label"><input type="radio" name="tripType" value="Round Trip" checked> Round Trip</label>
+                            <label class="radio-label"><input type="radio" name="tripType" value="Multi City"> Multi City</label>
+                        </div>
+                        <select name="flightClass" class="class-select">
+                            <option value="Economy">Economy</option>
+                            <option value="Premium Economy">Premium Economy</option>
+                            <option value="Business" selected>Business</option>
+                            <option value="First Class">First Class</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. Main Grid (From, To, Dates, Passengers) -->
+                    <div class="booking-grid">
+                        <!-- From & To combined visually for mobile stack or separate -->
+                        <div class="input-box">
+                            <label>From</label>
+                            <input type="text" name="from" placeholder="Origin City" required>
+                        </div>
+                        <div class="input-box">
+                            <label>To</label>
+                            <input type="text" name="to" placeholder="Destination" required>
+                        </div>
+                        
+                        <div class="input-box">
+                            <label>Departure</label>
+                            <input type="date" name="departureDate" required>
+                        </div>
+                        <div class="input-box">
+                            <label>Return</label>
+                            <input type="date" name="returnDate">
+                        </div>
+
+                        <!-- Passenger Counter -->
+                        <div class="input-box" style="grid-column: span 2; position: relative;">
+                            <label>Passengers</label>
+                            <div class="passenger-trigger" onclick="togglePax()">
+                                <span id="paxSummary">1 Passenger</span>
+                                <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                            </div>
+                            <!-- Hidden Dropdown -->
+                            <div class="passenger-dropdown" id="paxDropdown">
+                                <div class="pax-row">
+                                    <div class="pax-label">Adults <span>12y +</span></div>
+                                    <div class="pax-controls">
+                                        <button type="button" class="pax-btn" onclick="updatePax('adult', -1)">-</button>
+                                        <span id="adultCount">1</span>
+                                        <button type="button" class="pax-btn" onclick="updatePax('adult', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="pax-row">
+                                    <div class="pax-label">Children <span>2y - 12y</span></div>
+                                    <div class="pax-controls">
+                                        <button type="button" class="pax-btn" onclick="updatePax('child', -1)">-</button>
+                                        <span id="childCount">0</span>
+                                        <button type="button" class="pax-btn" onclick="updatePax('child', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="pax-row">
+                                    <div class="pax-label">Infants <span>Below 2y</span></div>
+                                    <div class="pax-controls">
+                                        <button type="button" class="pax-btn" onclick="updatePax('infant', -1)">-</button>
+                                        <span id="infantCount">0</span>
+                                        <button type="button" class="pax-btn" onclick="updatePax('infant', 1)">+</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="pax-apply" onclick="togglePax()">Done</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Contact Details Row -->
+                    <div class="contact-grid">
+                        <input type="text" name="fullName" class="contact-input" placeholder="Full Name" required>
+                        <input type="email" name="email" class="contact-input" placeholder="Email" required>
+                        <input type="tel" name="phone" class="contact-input" placeholder="Phone (+233...)" required>
+                        <button type="submit" class="btn-premium">
+                            Search Flights <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="section-padding" id="about">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Our Philosophy</h2>
+                <div class="separator"></div>
+                <p>At 256 Travels, our reputation is built on three non-negotiable pillars.</p>
+            </div>
+            
+            <div class="features-grid fade-up">
+                <div class="feature-card">
+                    <i class="fas fa-user-tie feature-icon"></i>
+                    <h3>Professionalism</h3>
+                    <p>We employ seasoned travel experts, not just agents. We understand that every traveler is unique, and we tailor our execution to meet the specific requirements of each client.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hand-holding-heart feature-icon"></i>
+                    <h3>Integrity</h3>
+                    <p>Trust is our most valuable currency. We operate with complete transparency regarding pricing and recommendations, building long-lasting relationships rooted in honesty.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb feature-icon"></i>
+                    <h3>Innovation</h3>
+                    <p>The world changes fast. We stay ahead of the curve by utilizing the latest travel technologies and staying updated on shifting global trends to offer you efficient solutions.</p>
+                </div>
+            </div>
+
+            <!-- Leadership Spotlight -->
+            <div class="leadership-section fade-up">
+                <div class="leadership-card">
+                    <div class="leader-avatar">
+                        <i class="fas fa-user-circle" style="font-size: 5rem; color: rgba(255,255,255,0.2);"></i>
+                    </div>
+                    <div class="leader-info">
+                        <span class="leader-role">General Manager</span>
+                        <h3>Himanshu Bhatnagar</h3>
+                        <p class="leader-quote">"At 256 Travels, our mission is driven by a passion for service excellence. We strive to be more than a travel agency; we are your strategic partner in discovering the world, ensuring every journey is memorable and every client feels valued."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section-padding services-section" id="services">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Curated Services</h2>
+                <div class="separator"></div>
+                <p>Comprehensive travel management solutions for individuals and corporations.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-up">
+                    <div class="service-header">
+                        <div class="service-icon-box"><i class="fas fa-plane"></i></div>
+                        <h3>Air Ticketing</h3>
+                    </div>
+                    <div class="service-body">
+                        <p>Command the Skies. We provide strategic flight management, offering multi-city routing and exclusive corporate deals optimized for your schedule and budget.</p>
+                    </div>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-header">
+                        <div class="service-icon-box"><i class="fas fa-passport"></i></div>
+                        <h3>Visa Assistance</h3>
+                    </div>
+                    <div class="service-body">
+                        <p>Borders Without Barriers. Our experts navigate international entry requirements, handling documentation and expedited processing to ensure your passport is ready.</p>
+                    </div>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-header">
+                        <div class="service-icon-box"><i class="fas fa-bed"></i></div>
+                        <h3>Hotel Booking</h3>
+                    </div>
+                    <div class="service-body">
+                        <p>Your Sanctuary, Anywhere. We leverage partnerships to secure special corporate rates and luxury packages, ensuring you always have a premium home base.</p>
+                    </div>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-header">
+                        <div class="service-icon-box"><i class="fas fa-heartbeat"></i></div>
+                        <h3>Medical Tourism</h3>
+                    </div>
+                    <div class="service-body">
+                        <p>Healthcare Beyond Borders. We coordinate treatments with top hospitals abroad, managing everything from travel and accommodation to post-treatment care.</p>
+                    </div>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-header">
+                        <div class="service-icon-box"><i class="fas fa-car"></i></div>
+                        <h3>Car Rentals</h3>
+                    </div>
+                    <div class="service-body">
+                        <p>Drive on Your Terms. Whether you require a luxury sedan for business or a rugged SUV for a group tour, we offer flexible leases with modern amenities.</p>
+                    </div>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-header">
+                        <div class="service-icon-box"><i class="fas fa-shuttle-van"></i></div>
+                        <h3>Airport Transfer</h3>
+                    </div>
+                    <div class="service-body">
+                        <p>Arrivals, Elevated. Eliminate the chaos of arrival with our reliable transfer service. Luxury cars, vans, and meet-and-greet experiences available 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Banner -->
+    <section class="mission-section">
+        <div class="mission-content fade-up">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p>Travel is an investment in time, health, and business. We don't just book travel; we provide total duty of care that stays with you from departure until you are safely back home.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4><i class="fas fa-plane-departure" style="color:var(--accent-brand)"></i> 256 TRAVELS</h4>
+                    <p>Your premier partner for seamless travel experiences. Based in Accra, serving the globe.</p>
+                </div>
+
+                <div>
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#about">Who We Are</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="footer-heading">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Group Tourism</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                        <li><a href="#">Honeymoon Packages</a></li>
+                        <li><a href="#">Cruise Bookings</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="footer-heading">Contact</h5>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>25 Buade Avenue, GZ-068-4838,<br>Teshie-Nungua Estate, Accra - Ghana</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+233 55 463 7256</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>256travels.tour@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 256 Travels & Tour. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Widget -->
+    <a href="https://wa.me/233554637256" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Menu Toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                // Change icon from bars to times
+                const icon = menuToggle.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.querySelector('i').classList.remove('fa-times');
+                    menuToggle.querySelector('i').classList.add('fa-bars');
+                });
+            });
+
+            // 2. Navbar Scroll Effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 3. Scroll Animations (Disabled on Mobile for Reliability)
+            const isMobile = window.innerWidth <= 768;
+            if (!isMobile) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.fade-up').forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Force show on mobile
+                document.querySelectorAll('.fade-up').forEach(el => {
+                    el.classList.add('active');
+                    el.style.opacity = 1;
+                    el.style.transform = 'none';
+                });
+            }
+
+            // 4. Passenger Counter Logic
+            let paxCounts = { adult: 1, child: 0, infant: 0 };
+            window.togglePax = function() {
+                document.getElementById('paxDropdown').classList.toggle('show');
+            }
+            
+            window.updatePax = function(type, change) {
+                const newCount = paxCounts[type] + change;
+                if(newCount < 0) return;
+                if(type === 'adult' && newCount < 1) return; // Min 1 adult
+                
+                paxCounts[type] = newCount;
+                document.getElementById(type+'Count').innerText = newCount;
+                
+                // Update Summary
+                const total = paxCounts.adult + paxCounts.child + paxCounts.infant;
+                document.getElementById('paxSummary').innerText = total + " Passenger" + (total>1?"s":"");
+            }
+
+            // Close dropdown if clicking outside
+            document.addEventListener('click', function(e) {
+                const trigger = document.querySelector('.passenger-trigger');
+                const dropdown = document.getElementById('paxDropdown');
+                if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // 5. Form Logic (Google Sheets)
+            const enquiryForm = document.getElementById('enquiryForm');
+            // --------------------------------------------------------
+            // PASTE YOUR GOOGLE SCRIPT URL BELOW
+            // --------------------------------------------------------
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFqby5oaplHoV_FWWA5t9mfRyJhX-8Wrt85WlDvlsWucqp56nZPl4U3Dcw2faY27Ph/exec'; 
+
+            enquiryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = document.querySelector('.btn-premium');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+                const formData = new FormData(enquiryForm);
+                const data = Object.fromEntries(formData.entries());
+                
+                // Add passenger string
+                data.passengers = `Adults: ${paxCounts.adult}, Children: ${paxCounts.child}, Infants: ${paxCounts.infant}`;
+
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    alert('Request Received! Our experts will contact you shortly.');
+                    enquiryForm.reset();
+                    btn.innerHTML = originalText;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Network Error. Please check your connection.');
+                    btn.innerHTML = originalText;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
